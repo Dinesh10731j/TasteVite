@@ -10,8 +10,8 @@ const Navbar = () => {
     <li>Find Receipe</li>
     <li>Buy</li>
 </ul>
-<button className="px-5 py-2 bg-cyan-600 rounded-md font-medium">Login</button>
-<button className="px-5 py-2 bg-cyan-600 rounded-md font-medium">Signup</button>
+<button className="px-5 py-2 t bg-cyan-500 rounded-md font-medium">Login</button>
+<button className="px-5 py-2 bg-cyan-500 rounded-md font-medium">Signup</button>
     </nav>
     </>
   )
