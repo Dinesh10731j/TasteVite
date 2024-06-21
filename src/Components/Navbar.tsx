@@ -4,7 +4,7 @@ const Navbar = () => {
     <>
     
     <nav>
-<h1 className="font-serif">TasteBite</h1>
+<h1 className="font-serif">TasteVite</h1>
 <ul>
     <li>Home</li>
     <li></li>
