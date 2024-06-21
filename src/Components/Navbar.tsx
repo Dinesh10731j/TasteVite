@@ -16,6 +16,7 @@ const Navbar = () => {
   <rect y="4" width="24" height="2" fill="#000"/>
   <rect y="11" width="24" height="2" fill="#000"/>
   <rect y="18" width="24" height="2" fill="#000"/>
+
 </svg>
 
     </nav>
