@@ -3,7 +3,8 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import { BaseUrl } from "../api/BaseUrl";
 
-const SearchReceipe = async (): Promise<{ idMeal: string, strMeal: string }[]> => {
+const SearchReceipe = async (): Promise<{ idMeal: string, strMeal: string,strMealThumb:string
+     }[]> => {
     const response = await axios.get(BaseUrl);
     console.log('API Response:', response.data);
 
@@ -36,8 +37,10 @@ const Searchbar = () => {
         <div className="">
             <input placeholder="Search for a recipe" />
             <div>
-                {Array.isArray(data) && data.map((recipe: { idMeal: string, strMeal: string }) => (
-                    <div key={recipe.idMeal}>{recipe.strMeal}</div>
+                {Array.isArray(data) && data.map((recipe: {
+                    strMealThumb: string | undefined; idMeal: string, strMeal: string 
+}) => (
+                    <><div key={recipe.idMeal}>{recipe.strMeal}</div><img src={recipe.strMealThumb} /></>
                 ))}
             </div>
         </div>
