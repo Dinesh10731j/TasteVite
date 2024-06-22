@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import { axiosInstance } from "../api/BaseUrl";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { ThreeCircles } from "react-loader-spinner";
+import {ThreeDots} from "react-loader-spinner";
 
 interface ResponseData {
   idMeal: string;
@@ -49,8 +49,8 @@ const Searchbar = () => {
 
   if (isLoading) {
     return (
-      <div className="text-2xl font-medium animate-bounce flex flex-col justify-center items-center mt-12">
-        <ThreeCircles color="#7f8c8d" />
+      <div className="text-2xl font-medium a flex flex-col justify-center items-center mt-12">
+        <ThreeDots color="#7f8c8d" />
       </div>
     );
   }
@@ -61,10 +61,11 @@ const Searchbar = () => {
 
   return (
     <div className="p-12 py-12">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-center items-center">
         <input
           type="text"
           placeholder="Search for a recipe"
+          className="px-6 py-2  border border-cyan-400 rounded-md shadow-lg md:[px-12 py-2]"
           {...register("Receipename", { required: true })}
         />
         {errors.Receipename && (
@@ -75,11 +76,11 @@ const Searchbar = () => {
           {Array.isArray(data) &&
             data?.map((recipe) => (
 <div key={recipe?.idMeal} className="flex flex-col justify-center items-center gap-10" >
-                <div>{recipe?.strMeal}</div>
+                <div className="font-serif font-medium text-2xl">{recipe?.strMeal}</div>
                 <img
                   src={recipe?.strMealThumb}
                   alt={recipe?.strMeal}
-                  className="h-[220px] w-[220px] md:h-[300px] md:w-[300px]"
+                  className="h-[220px] w-[220px] md:h-[300px] md:w-[300px] rounded-md shadow-md"
                 />
                 
                 <p>Ingredients</p>
