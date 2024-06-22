@@ -23,11 +23,12 @@ const Searchbar = () => {
         try {
           const response = await axiosInstance.get(`?s=${receipename}`);
     
-      
+      toast.success("Meal Load Successfully")
           if (response.data && Array.isArray(response.data.meals)) {
             return response.data.meals;
           } else {
             throw new Error('API response does not contain meals array');
+            toast.error
           }
         } catch (error) {
 
