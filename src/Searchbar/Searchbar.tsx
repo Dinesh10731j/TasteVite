@@ -1,50 +1,70 @@
-
 import { useQuery } from "react-query";
-import axios from "axios";
-import { BaseUrl } from "../api/BaseUrl";
+import { axiosInstance } from "../api/BaseUrl";
+import { toast } from "react-toastify";
+import {useForm} from "react-hook-form"
 
-const SearchReceipe = async (): Promise<{ idMeal: string, strMeal: string,strMealThumb:string
-     }[]> => {
-    const response = await axios.get(BaseUrl);
+interface ResponseData {
+  idMeal: string;
+  strMeal: string;
+  strMealThumb: string;
+}
+
+const searchRecipe = async (): Promise<ResponseData[]> => {
+  try {
+    const response = await axiosInstance.get("?s=pizza");
     console.log('API Response:', response.data);
 
     if (response.data && Array.isArray(response.data.meals)) {
-        return response.data.meals;
+      return response.data.meals;
     } else {
-        throw new Error('API response does not contain meals array');
+      console.error('API response structure:', response.data);
+      throw new Error('API response does not contain meals array');
     }
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error; // Rethrow the error so useQuery can handle it
+  }
 }
 
 const Searchbar = () => {
-    const { data = [], isLoading, error } = useQuery("receipe", SearchReceipe, {
-        onSuccess: (data) => {
-            console.log("Data Fetched Successfully", data);
-        },
-        onError: (error) => {
-            console.log("Error fetching data", error);
-        }
-    });
-
-    if (isLoading) {
-        return <div className="text-2xl font-medium">Loading.....</div>;
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["getRecipes"],
+    queryFn: searchRecipe,
+    onSuccess: () => {
+      toast.success('Data fetched successfully');
+    },
+    onError: () => {
+      toast.error('Failed to fetch data');
     }
+  });
 
-    if (error) {
-        return <h1>Error while fetching Receipe</h1>;
-    }
+  if (isLoading) {
+    return <div className="text-2xl font-medium">Loading.....</div>;
+  }
 
-    return (
-        <div className="">
-            <input placeholder="Search for a recipe" />
-            <div>
-                {Array.isArray(data) && data.map((recipe: {
-                    strMealThumb: string | undefined; idMeal: string, strMeal: string 
-}) => (
-                    <><div key={recipe.idMeal}>{recipe.strMeal}</div><img src={recipe.strMealThumb} /></>
-                ))}
-            </div>
-        </div>
-    );
+  if (error) {
+    return <h1>Error while fetching Recipe</h1>;
+  }
+
+  return (
+    <div className="">
+        <form>
+
+        <input placeholder="Search for a recipe" />
+      <div>
+        {Array.isArray(data) && data?.map((recipe) => (
+          <div key={recipe?.idMeal}>
+            <div>{recipe?.strMeal}</div>
+            <img src={recipe?.strMealThumb} alt={recipe.strMeal} />
+            <p>I am Rece</p>
+          </div>
+        ))}
+      </div>
+
+        </form>
+     
+    </div>
+  );
 }
 
 export default Searchbar;
