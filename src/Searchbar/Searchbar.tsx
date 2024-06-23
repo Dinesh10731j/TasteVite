@@ -83,8 +83,8 @@ const Searchbar = () => {
                   className="h-[220px] w-[220px] md:h-[300px] md:w-[300px] rounded-md shadow-md"
                 />
                 
-                <p>Ingredients</p>
-                <p>{recipe?.strInstructions}</p>
+                <p className="text-xl font-medium">Ingredients</p>
+                <p className="text-2xl text-wrap text-justify tracking-tighter">{recipe?.strInstructions}</p>
               </div>
 
         
