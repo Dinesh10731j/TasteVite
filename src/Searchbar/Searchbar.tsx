@@ -75,16 +75,16 @@ const Searchbar = () => {
         <div className="px-12 py-5">
           {Array.isArray(data) &&
             data?.map((recipe) => (
-<div key={recipe?.idMeal} className="flex flex-col justify-center items-center gap-10" >
-                <div className="font-serif font-medium text-2xl">{recipe?.strMeal}</div>
+<div key={recipe?.idMeal} className="flex flex-col justify-center items-center gap-5" >
+                <div className="font-serif font-medium text-2xl px-2 py-4">{recipe?.strMeal}</div>
                 <img
                   src={recipe?.strMealThumb}
                   alt={recipe?.strMeal}
                   className="h-[220px] w-[220px] md:h-[300px] md:w-[300px] rounded-md shadow-md"
                 />
                 
-                <p>Ingredients</p>
-                <p>{recipe?.strInstructions}</p>
+                <p className="text-xl font-medium">Ingredients</p>
+                <p className="text-2xl text-wrap text-justify tracking-tighter">{recipe?.strInstructions}</p>
               </div>
 
         
